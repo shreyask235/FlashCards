@@ -45,64 +45,87 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Outer CardView container -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/Card"
-        android:layout_width="370dp"
+    <HorizontalScrollView
+        android:layout_width="400dp"
         android:layout_height="400dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:elevation="40dp"
-        app:cardCornerRadius="30dp"
-        android:clickable="true"
         app:layout_constraintTop_toBottomOf="@+id/view"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.565">
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- FrameLayout holding front/back sides -->
-        <FrameLayout
-            android:id="@+id/card"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
+        <!-- Outer CardView container -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Card"
+                android:layout_width="370dp"
+                android:layout_height="400dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:elevation="40dp"
+                app:cardCornerRadius="30dp"
+                android:clickable="true"
+                app:layout_constraintTop_toBottomOf="@+id/view"
+                app:layout_constraintBottom_toBottomOf="@+id/view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintVertical_bias="0.565">
 
-            <!-- Front side of the card -->
-            <LinearLayout
-                android:id="@+id/card_front"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/greenTint"
-                android:gravity="center"
-                android:orientation="vertical">
+                <!-- FrameLayout holding front/back sides -->
+                <FrameLayout
+                    android:id="@+id/card"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/Title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#FFF"
-                    android:textSize="24sp" />
-            </LinearLayout>
+                    <!-- Front side of the card -->
 
-            <!-- Back side of the card -->
-            <LinearLayout
-                android:id="@+id/card_back"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/greenTint"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:visibility="gone">
+                    <!-- Back side of the card -->
+                    <LinearLayout
+                        android:id="@+id/card_front"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/greenTint"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/Description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#FFF"
-                    android:textSize="24sp" />
-            </LinearLayout>
+                        <TextView
+                            android:id="@+id/Title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:fontFamily="@font/bai_jamjuree_semibold"
+                            android:text="No FlashCards Created Yet"
+                            android:textColor="#FFF"
+                            android:textSize="24sp" />
+                    </LinearLayout>
 
-        </FrameLayout>
-    </androidx.cardview.widget.CardView>
+                    <LinearLayout
+                        android:id="@+id/card_back"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/greenTint"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/Description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#FFF"
+                            android:fontFamily="@font/bai_jamjuree_semibold"
+                            android:textAlignment="center"
+                            android:textSize="24sp" />
+                    </LinearLayout>
+
+                </FrameLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </HorizontalScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

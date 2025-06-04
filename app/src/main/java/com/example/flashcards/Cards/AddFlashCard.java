@@ -1,9 +1,11 @@
 package com.example.flashcards.Cards;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,15 +34,32 @@ public class AddFlashCard extends AppCompatActivity {
         title = findViewById(R.id.FlashTitle);
         description = findViewById(R.id.FlashDescription);
         btn = findViewById(R.id.submit);
+
         btn.setOnClickListener(v -> {
-            Home();
+            if(!validate()) {
+                Save(title.getText().toString(), description.getText().toString());
+                Home();
+            }
+            else {
+                Toast.makeText(this, "Missing Sections", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
     private void Home() {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("Title", title.getText().toString());
-        intent.putExtra("Description", description.getText().toString());
         startActivity(intent);
+    }
+
+    public void Save(String title, String description) {
+        SharedPreferences prefs = getSharedPreferences("FlashCard", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("Title", title);
+        editor.putString("Description", description);
+        editor.apply();
+    }
+
+    private boolean validate() {
+        return title.getText().toString().isEmpty() || description.getText().toString().isEmpty();
     }
 }

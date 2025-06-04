@@ -11,6 +11,7 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.MediaController;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     Button btn;
     FrameLayout frameLayout;
     View front, back;
+
     private boolean isBackVisible = false;
 
     @Override
@@ -49,11 +51,12 @@ public class MainActivity extends AppCompatActivity {
         greeting = findViewById(R.id.greeting);
         btn = findViewById(R.id.addFlashcard);
 
-        SharedPreferences prefs = getSharedPreferences("user_data", MODE_PRIVATE);
+        SharedPreferences pref_user = getSharedPreferences("user_data", MODE_PRIVATE);
+        SharedPreferences pref_card = getSharedPreferences("FlashCard", MODE_PRIVATE);
         Intent intent = getIntent();
-        greeting.setText("Hi " + prefs.getString("name", null));
-        title.setText(intent.getStringExtra("Title"));
-        description.setText(intent.getStringExtra("Description"));
+        greeting.setText("Hi " + pref_user.getString("name", null));
+        title.setText(pref_card.getString("Title", null));
+        description.setText(pref_card.getString("Description", null));
 
         // listeners
         btn.setOnClickListener(v -> {
@@ -83,6 +86,12 @@ public class MainActivity extends AppCompatActivity {
             back.animate().rotationY(0f).setDuration(300);
             front.animate().rotationY(-180f).setDuration(300).withEndAction(() -> front.setVisibility(View.GONE));
         }
+    }
+
+    private void AddCard() {
+        FrameLayout frameLayout;
+        View front, back;
+
     }
 
 
