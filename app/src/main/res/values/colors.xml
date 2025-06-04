@@ -3,4 +3,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="lavender">#BDB2FF</color>
+    <color name="greenTint">#C8E6C9 </color>
 </resources>

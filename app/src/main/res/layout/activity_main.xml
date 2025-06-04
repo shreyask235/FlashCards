@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -8,15 +9,17 @@
     android:padding="24dp"
     tools:context=".MainActivity">
 
+    <!-- Top colored section -->
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="500dp"
         android:background="@color/lavender"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Greeting text -->
     <TextView
         android:id="@+id/greeting"
         android:layout_width="wrap_content"
@@ -25,39 +28,81 @@
         android:fontFamily="@font/bai_jamjuree_semibold"
         android:textSize="60sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.127"
+        android:text="Hello"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.127" />
 
+    <!-- Add Flashcard Button -->
     <Button
-        android:id="@+id/button"
+        android:id="@+id/addFlashcard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Flashcard"
         android:textColorLink="#3588CA"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-
+    <!-- Outer CardView container -->
     <androidx.cardview.widget.CardView
+        android:id="@+id/Card"
         android:layout_width="370dp"
         android:layout_height="400dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:elevation="39dp"
+        android:elevation="40dp"
         app:cardCornerRadius="30dp"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:clickable="true"
         app:layout_constraintTop_toBottomOf="@+id/view"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintVertical_bias="0.565">
 
-    </androidx.cardview.widget.CardView>
+        <!-- FrameLayout holding front/back sides -->
+        <FrameLayout
+            android:id="@+id/card"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+            <!-- Front side of the card -->
+            <LinearLayout
+                android:id="@+id/card_front"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/greenTint"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFF"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+            <!-- Back side of the card -->
+            <LinearLayout
+                android:id="@+id/card_back"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/greenTint"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/Description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFF"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+        </FrameLayout>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

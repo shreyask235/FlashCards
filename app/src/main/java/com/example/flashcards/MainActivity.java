@@ -6,7 +6,10 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
 import android.webkit.WebView;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
@@ -17,9 +20,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.flashcards.Cards.AddFlashCard;
+
 public class MainActivity extends AppCompatActivity {
 
-    TextView greeting;
+    TextView greeting, title, description;
+    Button btn;
+    FrameLayout frameLayout;
+    View front, back;
+    private boolean isBackVisible = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +40,50 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        // Access to the elements
+        title = findViewById(R.id.Title);
+        description = findViewById(R.id.Description);
+        frameLayout = findViewById(R.id.card);
+        front = findViewById(R.id.card_front);
+        back = findViewById(R.id.card_back);
+        greeting = findViewById(R.id.greeting);
+        btn = findViewById(R.id.addFlashcard);
+
         SharedPreferences prefs = getSharedPreferences("user_data", MODE_PRIVATE);
         Intent intent = getIntent();
-        greeting = findViewById(R.id.greeting);
         greeting.setText("Hi " + prefs.getString("name", null));
+        title.setText(intent.getStringExtra("Title"));
+        description.setText(intent.getStringExtra("Description"));
+
+        // listeners
+        btn.setOnClickListener(v -> {
+            AddPage();
+        });
+
+        frameLayout.setOnClickListener(v -> {
+            flipCard(front, back, isBackVisible);
+            isBackVisible = !isBackVisible;
+        });
     }
+
+    private void AddPage() {
+        Intent intent = new Intent(this, AddFlashCard.class);
+        startActivity(intent);
+    }
+
+    private void flipCard(View front, View back, boolean isBackVisible) {
+        if (isBackVisible) {
+            front.setRotationY(-180f);
+            front.setVisibility(View.VISIBLE);
+            front.animate().rotationY(0f).setDuration(300);
+            back.animate().rotationY(180f).setDuration(300).withEndAction(() -> back.setVisibility(View.GONE));
+        } else {
+            back.setRotationY(180f);
+            back.setVisibility(View.VISIBLE);
+            back.animate().rotationY(0f).setDuration(300);
+            front.animate().rotationY(-180f).setDuration(300).withEndAction(() -> front.setVisibility(View.GONE));
+        }
+    }
+
 
 }
