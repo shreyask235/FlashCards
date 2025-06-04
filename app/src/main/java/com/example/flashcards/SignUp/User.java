@@ -1,4 +1,4 @@
-package com.example.flashcards;
+package com.example.flashcards.SignUp;
 
 import java.io.Serializable;
 

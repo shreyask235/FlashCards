@@ -1,4 +1,4 @@
-package com.example.flashcards;
+package com.example.flashcards.SignUp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,9 +13,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.flashcards.MainActivity;
+import com.example.flashcards.R;
+
 public class SignUp extends AppCompatActivity {
 
-    TextView email, password, linkText;
+    TextView name, email, password, linkText;
     Button btn;
 
     @Override
@@ -29,7 +32,7 @@ public class SignUp extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        name = findViewById(R.id.name);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         btn = findViewById(R.id.signBtn);
@@ -39,9 +42,9 @@ public class SignUp extends AppCompatActivity {
             if (email.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             } else {
-                saveUser(email.getText().toString(), password.getText().toString());
+                saveUser(name.getText().toString(),email.getText().toString(), password.getText().toString());
                 Toast.makeText(this, "Sign up successful", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(SignUp.this, MainActivity.class));
+                HomePage();
             }
         });
 
@@ -50,9 +53,16 @@ public class SignUp extends AppCompatActivity {
         });
     }
 
-    private void saveUser(String email, String password) {
+    private void HomePage() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("Name", name.getText().toString());
+        startActivity(intent);
+    }
+
+    private void saveUser(String name, String email, String password) {
         SharedPreferences prefs = getSharedPreferences("user_data", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("name", name);
         editor.putString("email", email);
         editor.putString("password", password);
         editor.apply();

@@ -1,15 +1,7 @@
-package com.example.flashcards;
+package com.example.flashcards.Cards;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
-import android.webkit.WebView;
-import android.widget.MediaController;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,24 +9,24 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.flashcards.R;
 
-    TextView greeting;
+public class AddFlashCard extends AppCompatActivity {
+
+    TextView title, description;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_add_flash_card);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        SharedPreferences prefs = getSharedPreferences("user_data", MODE_PRIVATE);
-        Intent intent = getIntent();
-        greeting = findViewById(R.id.greeting);
-        greeting.setText("Hi " + prefs.getString("name", null));
-    }
+        title = findViewById(R.id.FlashTitle);
+        description = findViewById(R.id.FlashDescription);
 
+    }
 }
